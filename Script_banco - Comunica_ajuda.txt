@@ -1,0 +1,40 @@
+-- Script SQL para PostgreSQL - Versão com Nomes em Português
+
+-- Tabela para armazenar as categorias de problemas
+CREATE TABLE IF NOT EXISTS categorias (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Tabela para armazenar os relatórios de problemas
+CREATE TABLE IF NOT EXISTS relatos (
+    id BIGSERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    descricao TEXT NOT NULL,
+    urgencia INTEGER NOT NULL CHECK (urgencia >= 1 AND urgencia <= 5),
+    categoria_id BIGINT NOT NULL,
+    localizacao VARCHAR(500) NOT NULL, -- Campo para o endereço/localização textual
+    url_imagem VARCHAR(1000), -- URL onde a imagem será armazenada (após upload)
+    status VARCHAR(50) NOT NULL DEFAULT 'Recebido', -- Ex: 'Recebido', 'Em Progresso', 'Resolvido', 'Rejeitado'
+    notas_admin TEXT, -- Notas internas do administrador
+    criado_em TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_categoria
+        FOREIGN KEY (categoria_id)
+        REFERENCES categorias (id)
+        ON DELETE RESTRICT -- Impede a exclusão de uma categoria se houver relatórios associados
+);
+
+-- Índices para otimização de consultas
+CREATE INDEX IF NOT EXISTS idx_relatos_status ON relatos (status);
+CREATE INDEX IF NOT EXISTS idx_relatos_categoria_id ON relatos (categoria_id);
+CREATE INDEX IF NOT EXISTS idx_relatos_criado_em ON relatos (criado_em DESC);
+
+-- Opcional: Inserir algumas categorias iniciais para testes
+INSERT INTO categorias (nome) VALUES
+('Manutenção de Parques') ON CONFLICT (nome) DO NOTHING,
+('Iluminação Pública') ON CONFLICT (nome) DO NOTHING,
+('Gestão de Resíduos') ON CONFLICT (nome) DO NOTHING,
+('Infraestrutura Urbana') ON CONFLICT (nome) DO NOTHING,
+('Segurança Pública') ON CONFLICT (nome) DO NOTHING,
+('Meio Ambiente') ON CONFLICT (nome) DO NOTHING;

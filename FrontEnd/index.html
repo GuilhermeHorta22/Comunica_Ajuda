@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunica & Ajuda</title>
+</head>
+<body>
+    <h1>Cadastrar categoria</h1>
+    <div id="dadosCategoria">
+        <div>
+            <label>Nome Categoria</label> <br>
+            <input type="text" name="nomeCategoria" id="nomeCategoria" required>
+        </div>
+    </div>
+    <br>
+    <div>
+        <button onclick="registrarCategoria()">Registrar</button>
+    </div>
+
+    <br><br><br>
+    <h1>Registrar Relato</h1>
+    <div id="dadosRelatos">
+        <div>
+            <label>Titulo</label>
+            <input type="text" name="tituloRelato" id="tituloRelato" required>
+        </div>
+        <br>
+        <div>
+            <label>Descrição</label>
+            <input type="text" name="descricaoRelato" id="descricaoRelato" required>
+        </div>
+        <br>
+        <div>
+            <label>Urgencia</label>
+            <input type="number" name="urgenciaRelato" id="urgenciaRelato" required>
+        </div>
+        <br>
+        <div>
+            <label>Categoria</label>
+            <input type="number" name="categoriaRelato" id="categoriaRelato" required>
+        </div>
+        <br>
+        <div>
+            <label>Localização</label>
+            <input type="text" name="localizacaoRelato" id="localizacaoRelato" required>
+        </div>
+        <br>
+        <div>
+            <label>Status</label>
+            <input type="text" name="statusRelato" id="statusRelato" required>
+        </div>
+        <br>
+        <div>
+            <label>Notas Administrador</label>
+            <input type="text" name="notaAdmRelato" id="notaAdmRelato" required>
+        </div>
+        <br>
+        <div>
+            <label>Criado em</label>
+            <input type="date" name="criadoEmRelato" id="criadoEmRelato" required>
+        </div>
+    </div>
+    <br>
+    <div>
+        <button onclick="registrarRelato()">Registrar</button>
+    </div>
+    
+</body>
+    <script src="api.js"></script>
+</html>

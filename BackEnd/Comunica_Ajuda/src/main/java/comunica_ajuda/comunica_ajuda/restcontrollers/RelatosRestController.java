@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("apis/relatos")
+@CrossOrigin(origins = "*")
 public class RelatosRestController
 {
     @Autowired
